@@ -1,9 +1,23 @@
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
+import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
 
+import { init } from "ityped";
+
 const Hero = () => {
+  const textRef = useRef();
+
+  useEffect(() => {
+    init(textRef.current, {
+      showCursor: true,
+      backDelay: 800,
+      backSpeed: 60,
+      strings: ["ReactJS", "Redux", "NodeJS", "MongoDB", "EJS"],
+    });
+  }, []);
+
   return (
     <section className={`relative w-full h-[700px] mx-auto`}>
       <div
@@ -18,9 +32,12 @@ const Hero = () => {
           <h1 className={`${styles.heroHeadText} text-white`}>
             Hi, I'm <span className='text-[#915EFF]'>Ivan</span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            I develop websites , user <br className='sm:block hidden' />
-            interfaces and web applications
+          <p className={`${styles.heroSubText} text-white-100`}>
+            I am a developer well versed in
+            <br className="sm:block hidden" />{" "}
+            <span className="text-[#915eff] font-bold" ref={textRef}>
+              {" "}
+            </span>
           </p>
         </div>
       </div>
