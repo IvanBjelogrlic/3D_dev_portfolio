@@ -34,7 +34,7 @@ const Hero = () => {
           </h1>
           <p className={`${styles.heroSubText} text-white-100`}>
             I am a developer well versed in
-            <br className="sm:block hidden" />{" "}
+            <br/>{" "}
             <span className="text-[#915eff] font-bold" ref={textRef}>
               {" "}
             </span>
