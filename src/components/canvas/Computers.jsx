@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable react/prop-types */
 import { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
@@ -9,7 +11,7 @@ const Computers = ({ isMobile }) => {
 
   return (
     <mesh>
-      <hemisphereLight intensity={2} groundColor="black" />
+      <hemisphereLight intensity={2} groundColor='black' />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
@@ -33,26 +35,29 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Funkcija za ažuriranje dimenzija pri promeni prozora.
-    const updateDimensions = () => {
-      setIsMobile(window.innerWidth <= 500);
+    // Add a listener for changes to the screen size
+    const mediaQuery = window.matchMedia("(max-width: 500px)");
+
+    // Set the initial value of the `isMobile` state variable
+    setIsMobile(mediaQuery.matches);
+
+    // Define a callback function to handle changes to the media query
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
     };
 
-    // Dodajemo event listener za promenu prozora.
-    window.addEventListener("resize", updateDimensions);
+    // Add the callback function as a listener for changes to the media query
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
 
-    // Pozivamo funkciju za inicijalno postavljanje dimenzija.
-    updateDimensions();
-
-    // Čišćenje event listenera pri uklanjanju komponente.
+    // Remove the listener when the component is unmounted
     return () => {
-      window.removeEventListener("resize", updateDimensions);
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
 
   return (
     <Canvas
-      frameloop="demand"
+      frameloop='demand'
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
