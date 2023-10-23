@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/traverse": "^7.23.2",
     "@emailjs/browser": "^3.11.0",
     "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.4",
